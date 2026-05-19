@@ -5,9 +5,7 @@ Voeg hier je URLs toe
 
 # URLs om QR-codes van te maken
 URLS = [
-    "https://github.com",
-    "https://www.python.org",
-    "https://www.google.com",
+    "https://mvdb.wine/pages/feedback-proeverij-jozef-eten-drinken-19-mei",
 ]
 
 # Optioneel: custom bestandsnamen
