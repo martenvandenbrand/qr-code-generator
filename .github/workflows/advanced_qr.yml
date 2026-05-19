@@ -36,23 +36,23 @@ jobs:
       run: python main.py
     
     - name: Upload QR codes as artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: qr-codes
-        path: qr_codes/
+        path: output/qr_codes/
         retention-days: 30
     
     - name: List generated files
       run: |
         echo "=== Generated QR Codes ==="
-        ls -lh qr_codes/ || echo "No QR codes generated"
+        ls -lh output/qr_codes/ || echo "No QR codes generated"
     
     - name: Commit changes
       run: |
-        if [ -n "$(git status --porcelain qr_codes/)" ]; then
+        if [ -n "$(git status --porcelain output/qr_codes/)" ]; then
           git config --local user.email "action@github.com"
           git config --local user.name "QR Code Bot"
-          git add qr_codes/
+          git add output/qr_codes/
           git commit -m "chore: update QR codes [skip ci]"
           git push
         else
@@ -68,4 +68,4 @@ jobs:
         echo "**Generated at:** $(date)" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "**Files created:**" >> $GITHUB_STEP_SUMMARY
-        ls -1 qr_codes/ | sed 's/^/- /' >> $GITHUB_STEP_SUMMARY
+        ls -1 output/qr_codes/ | sed 's/^/- /' >> $GITHUB_STEP_SUMMARY
