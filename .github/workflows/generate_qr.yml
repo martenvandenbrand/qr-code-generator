@@ -19,6 +19,8 @@ on:
 jobs:
   generate-qr-codes:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     
     steps:
     - name: Checkout code
@@ -54,8 +56,6 @@ jobs:
         git add output/qr_codes/
         git commit -m "chore: update QR codes - $(date +'%Y-%m-%d %H:%M:%S') [skip ci]"
         git push
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
     - name: No changes needed
       if: steps.verify-changed-files.outputs.changed == 'false'
